@@ -256,6 +256,7 @@
 - (void)jp_playVideoWithURL:(NSURL *)url
                     options:(JPVideoPlayerOptions)options
     configurationCompletion:(JPPlayVideoConfigurationCompletion)configurationCompletion {
+    self.helper.progressView.hidden = YES;
     [self playVideoWithURL:url
                    options:options
    configurationCompletion:configurationCompletion
