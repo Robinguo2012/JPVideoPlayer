@@ -399,10 +399,12 @@
 }
 
 - (void)jp_pause {
+    self.helper.videoPlayerView.pauseImageV.hidden = NO;
     [[JPVideoPlayerManager sharedManager] pause];
 }
 
 - (void)jp_resume {
+    self.helper.videoPlayerView.pauseImageV.hidden = YES;
     [[JPVideoPlayerManager sharedManager] resume];
 }
 

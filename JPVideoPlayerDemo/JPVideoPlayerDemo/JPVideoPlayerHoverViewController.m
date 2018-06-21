@@ -53,6 +53,9 @@
         view;
     });
 
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handTap:)];
+    [self.headerView addGestureRecognizer:tap];
+    
     self.hoverView = ({
         UIView *view = [UIView new];
         CGSize screenSize = [UIScreen mainScreen].bounds.size;
@@ -67,6 +70,15 @@
     });
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
     self.tableView.tableHeaderView = self.headerView;
+}
+
+- (void)handTap:(id)sender {
+    if (self.headerView.jp_playerStatus == JPVideoPlayerStatusPause) {
+        [self.headerView jp_resume];
+    }else
+    {
+        [self.headerView jp_pause];
+    }
 }
 
 - (void)viewDidLayoutSubviews {

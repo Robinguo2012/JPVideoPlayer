@@ -46,11 +46,12 @@
             JPErrorLog(@"Write file failed");
             break;
         }
-        else {
+        else {    
             bytesLeft = bytesLeft - amountSent;
             if (bytesLeft > 0) {
                 // not finished continue write after sleep 1 second.
                 JPWarningLog(@"Write file retry");
+                // 有点不太明白,为何这里需要分三次循环写入? 并且上次写入时间和下次间隔1s
                 sleep(1);  //probably too long, but this is quite rare.
                 retry--;
             }

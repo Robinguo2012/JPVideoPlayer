@@ -907,6 +907,8 @@ nearestViewControllerInViewTree:(UIViewController *_Nullable)nearestViewControll
 
 @property (nonatomic, strong) NSTimer *timer;
 
+@property (nonatomic, strong, readwrite) UIImageView *pauseImageV;
+
 @property(nonatomic, assign) BOOL isInterruptTimer;
 
 @end
@@ -1140,6 +1142,16 @@ static const NSTimeInterval kJPControlViewAutoHiddenTimeInterval = 5;
 
         view;
     });
+    
+    self.pauseImageV = ({
+        UIImageView *imageView = [UIImageView new];
+        [self addSubview:imageView];
+        imageView.frame = CGRectMake(0, 0, 58, 60);
+        imageView.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+        imageView.image = [UIImage imageNamed:@"JPVideoPlayer.bundle/pause_home"];
+        imageView.hidden = YES;
+        imageView;
+    });
 
     self.userInteractionContainerView = ({
         UIView *view = [UIView new];
@@ -1148,6 +1160,8 @@ static const NSTimeInterval kJPControlViewAutoHiddenTimeInterval = 5;
 
         view;
     });
+    
+    
 
     if (self.needAutoHideControlViewWhenUserTapping) {
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureDidTap)];

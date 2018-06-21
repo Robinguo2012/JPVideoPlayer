@@ -371,6 +371,9 @@ static const NSString *const kJPVideoPlayerContentRangeKey = @"Content-Range";
     BOOL hasApplication = UIApplicationClass && [UIApplicationClass respondsToSelector:@selector(sharedApplication)];
     if (hasApplication && [self shouldContinueWhenAppEntersBackground]) {
         UIApplication * app = [UIApplicationClass performSelector:@selector(sharedApplication)];
+        /**
+         程序退到后台会暂停执行,用这个方法能保持程序持续运行 180s
+         */
         self.backgroundTaskId = [app beginBackgroundTaskWithExpirationHandler:^{
             __strong __typeof (wself) sself = wself;
             if(!sself) return;

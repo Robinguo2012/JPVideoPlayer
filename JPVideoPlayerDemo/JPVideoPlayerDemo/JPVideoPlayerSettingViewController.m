@@ -50,6 +50,7 @@
     __weak typeof(self) weakSelf = self;
     // Clear all cache.
     // 清空所有缓存
+    
      [[JPVideoPlayerCache sharedCache] clearDiskOnCompletion:^{
          NSLog(@"clear disk finished, 清空磁盘完成");
          

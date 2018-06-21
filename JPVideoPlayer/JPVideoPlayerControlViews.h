@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 UIKIT_EXTERN NSString *JPVideoPlayerControlProgressViewUserDidStartDragNotification;
 UIKIT_EXTERN NSString *JPVideoPlayerControlProgressViewUserDidEndDragNotification;
+
 @interface JPVideoPlayerControlProgressView : UIView<JPVideoPlayerControlProgressProtocol>
 
 @property (nonatomic, strong, readonly) NSArray<NSValue *> *rangesValue;
@@ -131,6 +132,8 @@ UIKIT_EXTERN const CGFloat JPVideoPlayerProgressViewElementHeight;
  * A view to receive user interaction.
  */
 @property (nonatomic, strong, readonly) UIView *userInteractionContainerView;
+
+@property (nonatomic, strong, readonly) UIImageView *pauseImageV;
 
 /**
  * To control need automatic hide controlView when user touched.

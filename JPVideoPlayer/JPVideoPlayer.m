@@ -64,12 +64,12 @@
 /**
  * The last play time for player.
  */
-@property(nonatomic, assign)NSTimeInterval lastTime;
+@property (nonatomic, assign) NSTimeInterval lastTime;
 
 /**
  * The play progress observer.
  */
-@property(nonatomic, strong)id timeObserver;
+@property(nonatomic, strong) id timeObserver;
 
 /*
  * videoPlayer.
@@ -271,7 +271,9 @@ static NSString *JPVideoPlayerURL = @"www.newpan.com";
     // Make the `resourceLoader` become the delegate of 'videoURLAsset', and provide data to the player.
     JPVideoPlayerResourceLoader *resourceLoader = [JPVideoPlayerResourceLoader resourceLoaderWithCustomURL:url];
     resourceLoader.delegate = self;
-    AVURLAsset *videoURLAsset = [AVURLAsset URLAssetWithURL:[self handleVideoURL] options:nil];
+    NSURL *shemeURL = [self handleVideoURL];
+    
+    AVURLAsset *videoURLAsset = [AVURLAsset URLAssetWithURL:shemeURL options:nil];
     [videoURLAsset.resourceLoader setDelegate:resourceLoader queue:dispatch_get_main_queue()];
     AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:videoURLAsset];
     JPVideoPlayerModel *model = [self playerModelWithURL:url
@@ -721,9 +723,7 @@ static BOOL _isOpenAwakeWhenBuffering = NO;
                                                     totalSeconds:totalSeconds];
             }
         });
-
     }];
-
     return model;
 }
 

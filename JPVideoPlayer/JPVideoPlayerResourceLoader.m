@@ -20,7 +20,7 @@
 
 @interface JPVideoPlayerResourceLoader()<JPResourceLoadingRequestTaskDelegate>
 
-@property (nonatomic, strong)NSMutableArray<AVAssetResourceLoadingRequest *> *loadingRequests;
+@property (nonatomic, strong) NSMutableArray<AVAssetResourceLoadingRequest *> *loadingRequests;
 
 @property (nonatomic, strong) AVAssetResourceLoadingRequest *runningLoadingRequest;
 
@@ -96,7 +96,7 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
 - (void)resourceLoader:(AVAssetResourceLoader *)resourceLoader
 didCancelLoadingRequest:(AVAssetResourceLoadingRequest *)loadingRequest {
     if ([self.loadingRequests containsObject:loadingRequest]) {
-        if(loadingRequest == self.runningLoadingRequest){
+        if(loadingRequest == self.runningLoadingRequest) {
             JPDebugLog(@"取消了一个正在进行的请求");
             if(self.runningLoadingRequest && self.runningRequestTask){
                 [self.runningRequestTask cancel];
@@ -188,6 +188,7 @@ didCompleteWithError:(NSError *)error {
 - (void)startCurrentRequestWithLoadingRequest:(AVAssetResourceLoadingRequest *)loadingRequest
                                         range:(NSRange)dataRange {
     JPDebugLog(@"ResourceLoader 处理新的请求, 数据范围是: %@", NSStringFromRange(dataRange));
+    // 这里有问题, 只有findAndStartNextLoadingRequestIfNeed 会调用这个方法, 而在调用方法中传入的dataRange的length 不可能为 NSUIntegerMax
     if (dataRange.length == NSUIntegerMax) {
         [self addTaskWithLoadingRequest:loadingRequest
                                   range:NSMakeRange(dataRange.location, NSUIntegerMax)
