@@ -1055,6 +1055,8 @@ static const NSTimeInterval kJPControlViewAutoHiddenTimeInterval = 5;
                     bounds.size.height);
         }
     }
+    self.pauseImageV.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+    
 }
 
 - (void)callLayoutMethodForContainerSubviews {
