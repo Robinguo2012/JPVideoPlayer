@@ -383,6 +383,7 @@ nearestViewControllerInViewTree:(UIViewController *_Nullable)nearestViewControll
 - (void)videoPlayerStatusDidChange:(JPVideoPlayerStatus)playerStatus
                           videoURL:(NSURL *)videoURL {
     BOOL isPlaying = playerStatus == JPVideoPlayerStatusBuffering || playerStatus == JPVideoPlayerStatusPlaying;
+    self.jp_progressView.hidden = YES;
     self.playButton.selected = !isPlaying;
 }
 

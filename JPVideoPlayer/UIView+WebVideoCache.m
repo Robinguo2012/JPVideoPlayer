@@ -108,10 +108,12 @@
 }
 
 - (void)setJp_bufferingIndicator:(UIView <JPVideoPlayerBufferingProtocol> *)jp_bufferingIndicator {
+    jp_bufferingIndicator.hidden = YES;
     self.helper.bufferingIndicator = jp_bufferingIndicator;
 }
 
 - (UIView <JPVideoPlayerBufferingProtocol> *)jp_bufferingIndicator {
+    self.helper.bufferingIndicator.hidden = YES;
     return self.helper.bufferingIndicator;
 }
 
@@ -230,7 +232,7 @@
     }
     if(showDefaultView && !bufferingIndicator && !self.jp_bufferingIndicator){
         // Use default `JPVideoPlayerBufferingIndicator` if no bufferingIndicator.
-        bufferingIndicator = [JPVideoPlayerBufferingIndicator new];
+//        bufferingIndicator = [JPVideoPlayerBufferingIndicator new];
     }
     if(bufferingIndicator){
         self.jp_bufferingIndicator = bufferingIndicator;
@@ -295,6 +297,7 @@
         if(self.jp_bufferingIndicator && !self.jp_bufferingIndicator.superview){
             self.jp_bufferingIndicator.frame = self.bounds;
             [self.helper.videoPlayerView.bufferingIndicatorContainerView addSubview:self.jp_bufferingIndicator];
+            self.jp_bufferingIndicator.hidden = YES;
         }
         if(self.jp_bufferingIndicator){
             [self callStartBufferingDelegate];
@@ -405,6 +408,7 @@
 
 - (void)jp_resume {
     self.helper.videoPlayerView.pauseImageV.hidden = YES;
+    self.jp_progressView.hidden = YES;
     [[JPVideoPlayerManager sharedManager] resume];
 }
 
@@ -415,6 +419,7 @@
 - (void)jp_stopPlay {
     [[JPVideoPlayerManager sharedManager] stopPlay];
     self.helper.videoPlayerView.hidden = YES;
+    self.helper.videoPlayerView.pauseImageV.hidden = YES;
     self.helper.videoPlayerView.backgroundColor = [UIColor clearColor];
     [self callFinishBufferingDelegate];
 }
